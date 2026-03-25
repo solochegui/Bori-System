@@ -1,0 +1,13 @@
+# Archivos de registro (Logs)
+oportunidades_nfm.txt
+*.log
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos ocultos de sistema o editores
+.DS_Store
+.swp
+*.tmp
