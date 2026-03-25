@@ -1,30 +1,43 @@
-# 💠 Bori-System v2.4
+# 💠 Bori-System: NFM Precision Analyst v2.5
 
-Sistema de monitoreo, análisis técnico y gestión de cartera de criptomonedas optimizado para **Termux**. Este repositorio contiene herramientas automatizadas para detectar oportunidades de mercado bajo la estrategia NFM (Suelo Dinámico).
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)
+[![Platform](https://img.shields.io/badge/platform-Termux-orange.svg)](https://termux.dev)
+[![Strategy](https://img.shields.io/badge/strategy-Panic%20Sell%20Detection-red.svg)](#-estrategia-de-clímax-de-ventas)
 
-## 🚀 Scripts Incluidos
-
-* **`nfm_analyst_chegui.py`**: El motor principal. Analiza la presión de compra/venta, calcula el suelo dinámico y gestiona el valor total de la cartera en tiempo real.
-* **`bori_tracker.py`**: Rastreador de movimientos específicos de activos.
-* **`price_checker9che.py`**: Utilidad rápida para consulta de precios sin análisis profundo.
+**Bori-System** es un ecosistema de trading algorítmico diseñado para ejecutarse 24/7 en **Termux**. Su motor principal, `nfm_analyst_chegui.py`, utiliza análisis de volatilidad intradía para cazar suelos reales durante pánicos de mercado.
 
 ---
 
-## 📊 Estrategia NFM (Precision Analyst)
+## 🚀 Mejoras en la v2.5 (Professional Edition)
 
-El sistema utiliza un algoritmo de **Suelo Elástico** para evitar señales falsas:
-
-1.  **Detección de Sobreventa:** Filtra activos con caídas superiores al 7% en 24h.
-2.  **Suelo Dinámico:** Calcula niveles de rebote basados en el `low_24h` con un margen de seguridad del 1.5%.
-3.  **Protección Anti-Crash:** Implementación de validación de datos `NoneType` para evitar cierres inesperados por fallos en la API.
+* **🔥 Detección de Clímax de Ventas:** Nuevo algoritmo que identifica el "Panic Sell" mediante la posición del precio en el rango de 24h.
+* **🛡️ Blindaje NoneType:** Protección total contra fallos de la API de CoinGecko. El script ya no colapsa si recibe datos nulos.
+* **⚡ Optimización de Latencia:** Se eliminó el uso de sparklines pesadas, reduciendo el consumo de datos y acelerando la respuesta.
+* **🧹 Gestión de Almacenamiento:** Sistema de auto-limpieza de logs que mantiene el archivo `oportunidades_nfm.txt` por debajo de 1MB.
 
 ---
 
-## 🛠️ Instalación y Uso
+## 🧠 Estrategia de "Malicia" Técnica
 
-### Prerrequisitos
-Desde tu terminal de Termux, asegúrate de tener instaladas las dependencias:
+A diferencia de otros bots que compran solo por caída porcentual, Bori-System analiza la **Posición del Rango**:
+
+
+
+1.  **Zona de Acumulación:** Si el precio baja pero se mantiene estable, el bot sugiere `MANTENER`.
+2.  **Buscando Suelo:** Si la caída es moderada, calcula un soporte dinámico un 1.5% por debajo del mínimo actual.
+3.  **Clímax de Ventas:** Si la caída es >10% y el precio toca el fondo del día, se activa la alerta de `CARGAR (COMPRA)`.
+
+---
+
+## 🛠️ Instalación Rápida
+
 ```bash
+# Instalar dependencias
 pkg update && pkg upgrade
 pkg install python git -y
 pip install requests
+
+# Clonar y Ejecutar
+git clone [https://github.com/solochegui/Bori-System.git](https://github.com/solochegui/Bori-System.git)
+cd Bori-System
+python nfm_analyst_chegui.py
